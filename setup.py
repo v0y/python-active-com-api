@@ -8,6 +8,7 @@ with open(os.path.join(here, 'README.md')) as f:
     README = f.read()
 
 requires = [
+    'nose2==0.4.7'
 ]
 
 setup(
@@ -27,4 +28,5 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=requires,
+    test_suite='nose2.collector.collector',
 )
