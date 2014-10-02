@@ -43,3 +43,12 @@ class SearchApiV2Tests(TestCase):
         expected_query = self.base_query + '&lat_lon=52.2464391,21.0334827'
 
         self.assertQueriesEqual(query, expected_query)
+
+    def test_radius(self):
+        query = self.search_api.radius(kilometers=123)
+        expected_query = self.base_query + '&radius=76.428633'
+        self.assertQueriesEqual(query, expected_query)
+
+        query = self.search_api.radius(miles=123)
+        expected_query = self.base_query + '&radius=123'
+        self.assertQueriesEqual(query, expected_query)

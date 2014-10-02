@@ -54,3 +54,19 @@ class SearchApiV2(object):
         Not Implemented. I'm lazy.
         """
         raise NotImplementedError
+
+    def radius(self, miles=None, kilometers=None):
+        """
+        The search radius as specified in miles or kilometers
+
+        :param miles: The search radius as specified in miles
+        :param kilometers: The search radius as specified in kilometers
+        """
+
+        assert miles or kilometers
+        assert not(miles and kilometers)
+
+        miles = miles or kilometers * 0.621371
+
+        self._append_query(radius=miles)
+        return self.query
