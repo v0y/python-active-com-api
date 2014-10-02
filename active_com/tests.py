@@ -52,3 +52,8 @@ class SearchApiV2Tests(TestCase):
         query = self.search_api.radius(miles=123)
         expected_query = self.base_query + '&radius=123'
         self.assertQueriesEqual(query, expected_query)
+
+    def test_city(self):
+        query = self.search_api.city('dupa')
+        expected_query = self.base_query + '&city=dupa'
+        self.assertQueriesEqual(query, expected_query)

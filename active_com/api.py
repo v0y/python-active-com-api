@@ -70,3 +70,12 @@ class SearchApiV2(object):
 
         self._append_query(radius=miles)
         return self.query
+
+    def city(self, city):
+        """
+        Matches assets by city name.
+
+        :param city: city name
+        """
+        self._append_query(city=city)
+        return self.query
