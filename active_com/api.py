@@ -42,3 +42,15 @@ class SearchApiV2(object):
         """
         self._append_query(lat_lon="%s,%s" % (lat, lon))
         return self.query
+
+    def bbox(self):
+        """
+        Not Implemented. I'm lazy.
+        """
+        raise NotImplementedError
+
+    def geo_points(self):
+        """
+        Not Implemented. I'm lazy.
+        """
+        raise NotImplementedError
