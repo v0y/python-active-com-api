@@ -8,20 +8,32 @@ class SearchApiV2Tests(TestCase):
 
     def setUp(self):
         self.search_api = SearchApiV2('abc')
+        self.base_query = 'http://api.amp.active.com/v2/search?api_key=abc'
 
-    def test_append_query_returns_query(self):
-        query = self.search_api._append_query(key='val', key2='val 2')
-        expected_query = \
-            'http://api.amp.active.com/v2/search?' \
-            'key=val&key2=val+2&api_key=abc'
+    def assertQueriesEqual(self, query1, query2):
+        parsed_query1 = list(urlparse(query1))
+        parsed_query2 = list(urlparse(query2))
 
-        parsed_query = list(urlparse(query))
-        parsed_expected_query = list(urlparse(expected_query))
+        self.assertListEqual(
+            sorted(parsed_query1[4].split('&')),
+            sorted(parsed_query2[4].split('&')))
 
         # check uri without GET values
-        self.assertListEqual(parsed_query[:4], parsed_expected_query[:4])
+        self.assertListEqual(parsed_query1[:4], parsed_query2[:4])
 
         # check GET values
         self.assertListEqual(
-            sorted(parsed_query[4].split('&')),
-            sorted(parsed_expected_query[4].split('&')))
+            sorted(parsed_query1[4].split('&')),
+            sorted(parsed_query2[4].split('&')))
+
+    def test_append_query_returns_query(self):
+        query = self.search_api._append_query(key='val', key2='val 2')
+        expected_query = self.base_query + '&key=val&key2=val+2'
+
+        self.assertQueriesEqual(query, expected_query)
+
+    def test_near(self):
+        query = self.search_api.near('dupa')
+        expected_query = self.base_query + '&near=dupa'
+
+        self.assertQueriesEqual(query, expected_query)
