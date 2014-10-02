@@ -79,3 +79,12 @@ class SearchApiV2(object):
         """
         self._append_query(city=city)
         return self.query
+
+    def state(self, state):
+        """
+        Matches assets by state or province code
+
+        :param state: state or province code
+        """
+        self._append_query(state=state)
+        return self.query

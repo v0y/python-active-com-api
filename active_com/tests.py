@@ -57,3 +57,8 @@ class SearchApiV2Tests(TestCase):
         query = self.search_api.city('dupa')
         expected_query = self.base_query + '&city=dupa'
         self.assertQueriesEqual(query, expected_query)
+
+    def test_state(self):
+        query = self.search_api.state('CA')
+        expected_query = self.base_query + '&state=CA'
+        self.assertQueriesEqual(query, expected_query)
