@@ -62,3 +62,8 @@ class SearchApiV2Tests(TestCase):
         query = self.search_api.state('CA')
         expected_query = self.base_query + '&state=CA'
         self.assertQueriesEqual(query, expected_query)
+
+    def test_zip(self):
+        query = self.search_api.zip('12345')
+        expected_query = self.base_query + '&zip=12345'
+        self.assertQueriesEqual(query, expected_query)

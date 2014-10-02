@@ -88,3 +88,12 @@ class SearchApiV2(object):
         """
         self._append_query(state=state)
         return self.query
+
+    def zip(self, zip):
+        """
+        Matches assets by zip or postal code
+
+        :param zip: zip or postal code
+        """
+        self._append_query(zip=zip)
+        return self.query
