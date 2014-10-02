@@ -19,7 +19,8 @@ class SearchApiV2(object):
         query.update(request)
         url_parts[4] = urlencode(query)
 
-        self.query = urlunparse(url_parts)
+        query = urlunparse(url_parts)
+        self.query = query.replace('%2C', ',')  # fix commas
         return self.query
 
     def near(self, near):
@@ -31,4 +32,13 @@ class SearchApiV2(object):
         Example: San%20Diego,CA,US
         """
         self._append_query(near=near)
+        return self.query
+
+    def lat_lon(self, lat, lon):
+        """
+        A location specified as a latitude and longitude.
+        :param lat: latitude, example: 43.2
+        :param lon: latitude, example: -118
+        """
+        self._append_query(lat_lon="%s,%s" % (lat, lon))
         return self.query

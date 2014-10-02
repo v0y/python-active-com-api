@@ -37,3 +37,9 @@ class SearchApiV2Tests(TestCase):
         expected_query = self.base_query + '&near=dupa'
 
         self.assertQueriesEqual(query, expected_query)
+
+    def test_lan_lot(self):
+        query = self.search_api.lat_lon(52.2464391, '21.0334827')
+        expected_query = self.base_query + '&lat_lon=52.2464391,21.0334827'
+
+        self.assertQueriesEqual(query, expected_query)
