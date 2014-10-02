@@ -97,3 +97,12 @@ class SearchApiV2(object):
         """
         self._append_query(zip=zip)
         return self.query
+
+    def country(self, country):
+        """
+        Matches assets by country name
+
+        :param country: country name
+        """
+        self._append_query(country=country)
+        return self.query
