@@ -153,3 +153,18 @@ class SearchApiV2(object):
         self._append_query(sort=sort)
         return self.query_url
 
+    def facets(self, facets):
+        """
+        List containing the facet counts to return. It will bring all
+        values for a particular field that show up in your result set.
+        In the example below, you will get a break down of all the
+        category names present in your search for tinker bell half
+        marathon.
+
+        Example:
+        query=tinker%20bell%20half%20marathon&facets=categoryName
+
+        :param facets: list, facet counts to return
+        """
+        self._append_query(facets=','.join(facets))
+        return self.query_url

@@ -92,3 +92,8 @@ class SearchApiV2Tests(TestCase):
         query = self.search_api.sort('distance')
         expected_query = self.base_query + '&sort=distance'
         self.assertQueriesEqual(query, expected_query)
+
+    def test_facets(self):
+        query = self.search_api.facets(['countryName', 'categoryName'])
+        expected_query = self.base_query + '&facets=countryName,categoryName'
+        self.assertQueriesEqual(query, expected_query)
