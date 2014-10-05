@@ -237,9 +237,9 @@ class SearchApiV2(object):
         Limits results to assets with a start date in the given range.
 
         :type from_date: date
-        :param from_date: beginning of rande
+        :param from_date: beginning of range
         :type to_date: date
-        :param to_date: end of rande
+        :param to_date: end of range
         :rtype: str
         :return: updated query
         """
@@ -250,4 +250,24 @@ class SearchApiV2(object):
 
         range_str = '%s..%s' % (from_date_str, to_date_str)
         self._append_query(start_date=range_str)
+        return self.query_url
+
+    def end_date(self, from_date=None, to_date=None):
+        """
+        Limits results to assets with an end date in the given range.
+
+        :type from_date: date
+        :param from_date: beginning of range
+        :type to_date: date
+        :param to_date: end of range
+        :rtype: str
+        :return: updated query
+        """
+        assert from_date or to_date
+
+        from_date_str = from_date.isoformat() if from_date else ''
+        to_date_str = to_date.isoformat() if to_date else ''
+
+        range_str = '%s..%s' % (from_date_str, to_date_str)
+        self._append_query(end_date=range_str)
         return self.query_url

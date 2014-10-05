@@ -124,3 +124,19 @@ class SearchApiV2Tests(TestCase):
         query = self.search_api.start_date(to_date=d2)
         expected_query = self.base_query + '&start_date=..2014-03-04'
         self.assertQueriesEqual(query, expected_query)
+
+    def test_end_date(self):
+        d1 = date(2014, 1, 2)
+        d2 = date(2014, 3, 4)
+
+        query = self.search_api.end_date(from_date=d1, to_date=d2)
+        expected_query = self.base_query + '&end_date=2014-01-02..2014-03-04'
+        self.assertQueriesEqual(query, expected_query)
+
+        query = self.search_api.end_date(from_date=d1)
+        expected_query = self.base_query + '&end_date=2014-01-02..'
+        self.assertQueriesEqual(query, expected_query)
+
+        query = self.search_api.end_date(to_date=d2)
+        expected_query = self.base_query + '&end_date=..2014-03-04'
+        self.assertQueriesEqual(query, expected_query)
