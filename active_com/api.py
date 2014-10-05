@@ -298,3 +298,16 @@ class SearchApiV2(object):
         """
         self._append_query(exists=','.join(exists))
         return self.query_url
+
+    def not_exists(self, not_exists):
+        """
+        Filters results to assets that do not have a value for the
+        specified field(s)
+
+        :type: list|tuple
+        :param not_exists: fields, which must have values
+        :rtype: str
+        :return: updated query
+        """
+        self._append_query(not_exists=','.join(not_exists))
+        return self.query_url

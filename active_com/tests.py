@@ -158,3 +158,12 @@ class SearchApiV2Tests(TestCase):
         query = self.search_api.exists(['asset.authorName'])
         expected_query = self.base_query + '&exists=asset.authorName'
         self.assertQueriesEqual(query, expected_query)
+
+    def test_not_exists(self):
+        query = self.search_api.not_exists(['countryName', 'authorName'])
+        expected_query = self.base_query + '&not_exists=countryName,authorName'
+        self.assertQueriesEqual(query, expected_query)
+
+        query = self.search_api.not_exists(['asset.authorName'])
+        expected_query = self.base_query + '&not_exists=asset.authorName'
+        self.assertQueriesEqual(query, expected_query)
