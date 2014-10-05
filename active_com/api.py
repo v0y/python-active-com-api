@@ -271,3 +271,17 @@ class SearchApiV2(object):
         range_str = '%s..%s' % (from_date_str, to_date_str)
         self._append_query(end_date=range_str)
         return self.query_url
+
+    def exclude_children(self, exclude_children):
+        """
+        Removes children assets from the results list. If the parameter
+        is not present, all assets will be returned in the results list.
+
+        :type exclude_children: bool
+        :param exclude_children: are children should be excluded?
+        :rtype: str
+        :return: updated query
+        """
+        bool_str = 'true' if exclude_children else 'false'
+        self._append_query(exclude_children=bool_str)
+        return self.query_url

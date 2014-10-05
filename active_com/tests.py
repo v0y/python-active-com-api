@@ -140,3 +140,12 @@ class SearchApiV2Tests(TestCase):
         query = self.search_api.end_date(to_date=d2)
         expected_query = self.base_query + '&end_date=..2014-03-04'
         self.assertQueriesEqual(query, expected_query)
+
+    def test_exclude_children(self):
+        query = self.search_api.exclude_children(True)
+        expected_query = self.base_query + '&exclude_children=true'
+        self.assertQueriesEqual(query, expected_query)
+
+        query = self.search_api.exclude_children(False)
+        expected_query = self.base_query + '&exclude_children=false'
+        self.assertQueriesEqual(query, expected_query)
