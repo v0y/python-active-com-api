@@ -13,7 +13,7 @@ requires = [
 
 setup(
     name='python-active-com-api',
-    version='0.0',
+    version='0.1',
     description='Python client for Active.com API ',
     long_description=README,
     classifiers=[
