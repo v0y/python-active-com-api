@@ -136,3 +136,20 @@ class SearchApiV2(object):
         self._append_query(per_page=per_page)
         return self.query_url
 
+    def sort(self, sort):
+        """
+        The sort order of the results.
+        The possible values are date_asc, date_desc, and distance.
+        If sort is not specified, results are sort by relevance to the
+        query param. Distance can only be used when either the near or
+        lat_lon parameters are specified and sorts the results
+        according to distance from the specified location smallest to
+        largest.
+
+        :param sort: sort by (date_asc | date_desc | distance)
+        """
+        assert sort in ['date_asc', 'date_desc', 'distance']
+
+        self._append_query(sort=sort)
+        return self.query_url
+

@@ -87,3 +87,8 @@ class SearchApiV2Tests(TestCase):
         query = self.search_api.per_page('30')
         expected_query = self.base_query + '&per_page=30'
         self.assertQueriesEqual(query, expected_query)
+
+    def test_sort(self):
+        query = self.search_api.sort('distance')
+        expected_query = self.base_query + '&sort=distance'
+        self.assertQueriesEqual(query, expected_query)
