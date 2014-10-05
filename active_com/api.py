@@ -117,3 +117,13 @@ class SearchApiV2(object):
         """
         self._append_query(query=query)
         return self.query_url
+
+    def current_page(self, current_page):
+        """
+        The current page of results. Defaults to 1.
+
+        :param current_page: current page number
+        """
+        self._append_query(current_page=current_page)
+        return self.query_url
+
