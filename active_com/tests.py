@@ -102,3 +102,8 @@ class SearchApiV2Tests(TestCase):
         query = self.search_api.category('Person')
         expected_query = self.base_query + '&category=Person'
         self.assertQueriesEqual(query, expected_query)
+
+    def test_topic(self):
+        query = self.search_api.topic('Running')
+        expected_query = self.base_query + '&topic=Running'
+        self.assertQueriesEqual(query, expected_query)

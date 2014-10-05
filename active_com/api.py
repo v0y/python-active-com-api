@@ -219,3 +219,15 @@ class SearchApiV2(object):
         """
         self._append_query(category=category)
         return self.query_url
+
+    def topic(self, topic):
+        """
+        Matches assets by topic name.
+
+        :type: str
+        :param topic: topic string
+        :rtype: str
+        :return: updated query
+        """
+        self._append_query(topic=topic)
+        return self.query_url
