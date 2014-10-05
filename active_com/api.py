@@ -285,3 +285,16 @@ class SearchApiV2(object):
         bool_str = 'true' if exclude_children else 'false'
         self._append_query(exclude_children=bool_str)
         return self.query_url
+
+    def exists(self, exists):
+        """
+        Filters results to assets that have a value for the specified
+        field(s).
+
+        :type: list|tuple
+        :param exists: fields, which must have values
+        :rtype: str
+        :return: updated query
+        """
+        self._append_query(exists=','.join(exists))
+        return self.query_url

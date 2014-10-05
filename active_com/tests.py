@@ -149,3 +149,12 @@ class SearchApiV2Tests(TestCase):
         query = self.search_api.exclude_children(False)
         expected_query = self.base_query + '&exclude_children=false'
         self.assertQueriesEqual(query, expected_query)
+
+    def test_exists(self):
+        query = self.search_api.exists(['countryName', 'authorName'])
+        expected_query = self.base_query + '&exists=countryName,authorName'
+        self.assertQueriesEqual(query, expected_query)
+
+        query = self.search_api.exists(['asset.authorName'])
+        expected_query = self.base_query + '&exists=asset.authorName'
+        self.assertQueriesEqual(query, expected_query)
