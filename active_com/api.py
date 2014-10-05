@@ -47,11 +47,11 @@ class SearchApiV2(object):
 
         :type near: str
         :param near: Geocodable place name
-        :rtype: str
-        :return: updated query
+        :rtype: SearchApiV2
+        :return: self object
         """
         self._append_query(near=near)
-        return self.query_url
+        return self
 
     def lat_lon(self, lat, lon):
         """
@@ -61,11 +61,11 @@ class SearchApiV2(object):
         :param lat: Latitude. Example: 43.2
         :type lon: float|int
         :param lon: Longitude. Example: -118
-        :rtype: str
-        :return: updated query
+        :rtype: SearchApiV2
+        :return: self object
         """
         self._append_query(lat_lon="%s,%s" % (lat, lon))
-        return self.query_url
+        return self
 
     def bbox(self):
         """
@@ -87,8 +87,8 @@ class SearchApiV2(object):
         :param miles: The search radius as specified in miles
         :type kilometers: int|float
         :param kilometers: The search radius as specified in kilometers
-        :rtype: str
-        :return: updated query
+        :rtype: SearchApiV2
+        :return: self object
         """
         assert miles or kilometers
         assert not(miles and kilometers)
@@ -96,7 +96,7 @@ class SearchApiV2(object):
         miles = miles or kilometers * 0.621371
 
         self._append_query(radius=miles)
-        return self.query_url
+        return self
 
     def city(self, city):
         """
@@ -104,11 +104,11 @@ class SearchApiV2(object):
 
         :type city: str
         :param city: city name
-        :rtype: str
-        :return: updated query
+        :rtype: SearchApiV2
+        :return: self object
         """
         self._append_query(city=city)
-        return self.query_url
+        return self
 
     def state(self, state):
         """
@@ -116,11 +116,11 @@ class SearchApiV2(object):
 
         :type state: str
         :param state: state or province code
-        :rtype: str
-        :return: updated query
+        :rtype: SearchApiV2
+        :return: self object
         """
         self._append_query(state=state)
-        return self.query_url
+        return self
 
     def zip(self, zip_code):
         """
@@ -128,11 +128,11 @@ class SearchApiV2(object):
 
         :type zip_code: str
         :param zip_code: zip or postal code
-        :rtype: str
-        :return: updated query
+        :rtype: SearchApiV2
+        :return: self object
         """
         self._append_query(zip=zip_code)
-        return self.query_url
+        return self
 
     def country(self, country):
         """
@@ -140,11 +140,11 @@ class SearchApiV2(object):
 
         :type country: str
         :param country: country name
-        :rtype: str
-        :return: updated query
+        :rtype: SearchApiV2
+        :return: self object
         """
         self._append_query(country=country)
-        return self.query_url
+        return self
 
     def query(self, query):
         """
@@ -153,11 +153,11 @@ class SearchApiV2(object):
 
         :type query: str
         :param query: query string
-        :rtype: str
-        :return: updated query
+        :rtype: SearchApiV2
+        :return: self object
         """
         self._append_query(query=query)
-        return self.query_url
+        return self
 
     def current_page(self, current_page):
         """
@@ -165,11 +165,11 @@ class SearchApiV2(object):
 
         :type current_page: int
         :param current_page: current page number
-        :rtype: str
-        :return: updated query
+        :rtype: SearchApiV2
+        :return: self object
         """
         self._append_query(current_page=current_page)
-        return self.query_url
+        return self
 
     def per_page(self, per_page):
         """
@@ -177,11 +177,11 @@ class SearchApiV2(object):
 
         :type per_page: int
         :param per_page: number of results to return
-        :rtype: str
-        :return: updated query
+        :rtype: SearchApiV2
+        :return: self object
         """
         self._append_query(per_page=per_page)
-        return self.query_url
+        return self
 
     def sort(self, sort):
         """
@@ -195,13 +195,13 @@ class SearchApiV2(object):
 
         :type sort: str
         :param sort: sort by (date_asc | date_desc | distance)
-        :rtype: str
-        :return: updated query
+        :rtype: SearchApiV2
+        :return: self object
         """
         assert sort in ['date_asc', 'date_desc', 'distance']
 
         self._append_query(sort=sort)
-        return self.query_url
+        return self
 
     def facets(self, facets):
         """
@@ -216,11 +216,11 @@ class SearchApiV2(object):
 
         :type facets: list|tuple
         :param facets: facet counts to return
-        :rtype: str
-        :return: updated query
+        :rtype: SearchApiV2
+        :return: self object
         """
         self._append_query(facets=','.join(facets))
-        return self.query_url
+        return self
 
     def category(self, category):
         """
@@ -228,11 +228,11 @@ class SearchApiV2(object):
 
         :type: str
         :param category: category string
-        :rtype: str
-        :return: updated query
+        :rtype: SearchApiV2
+        :return: self object
         """
         self._append_query(category=category)
-        return self.query_url
+        return self
 
     def topic(self, topic):
         """
@@ -240,11 +240,11 @@ class SearchApiV2(object):
 
         :type: str
         :param topic: topic string
-        :rtype: str
-        :return: updated query
+        :rtype: SearchApiV2
+        :return: self object
         """
         self._append_query(topic=topic)
-        return self.query_url
+        return self
 
     def start_date(self, from_date=None, to_date=None):
         """
@@ -254,8 +254,8 @@ class SearchApiV2(object):
         :param from_date: beginning of range
         :type to_date: date
         :param to_date: end of range
-        :rtype: str
-        :return: updated query
+        :rtype: SearchApiV2
+        :return: self object
         """
         assert from_date or to_date
 
@@ -264,7 +264,7 @@ class SearchApiV2(object):
 
         range_str = '%s..%s' % (from_date_str, to_date_str)
         self._append_query(start_date=range_str)
-        return self.query_url
+        return self
 
     def end_date(self, from_date=None, to_date=None):
         """
@@ -274,8 +274,8 @@ class SearchApiV2(object):
         :param from_date: beginning of range
         :type to_date: date
         :param to_date: end of range
-        :rtype: str
-        :return: updated query
+        :rtype: SearchApiV2
+        :return: self object
         """
         assert from_date or to_date
 
@@ -284,7 +284,7 @@ class SearchApiV2(object):
 
         range_str = '%s..%s' % (from_date_str, to_date_str)
         self._append_query(end_date=range_str)
-        return self.query_url
+        return self
 
     def exclude_children(self, exclude_children):
         """
@@ -293,12 +293,12 @@ class SearchApiV2(object):
 
         :type exclude_children: bool
         :param exclude_children: are children should be excluded?
-        :rtype: str
-        :return: updated query
+        :rtype: SearchApiV2
+        :return: self object
         """
         bool_str = 'true' if exclude_children else 'false'
         self._append_query(exclude_children=bool_str)
-        return self.query_url
+        return self
 
     def exists(self, exists):
         """
@@ -307,11 +307,11 @@ class SearchApiV2(object):
 
         :type: list|tuple
         :param exists: fields, which must have values
-        :rtype: str
-        :return: updated query
+        :rtype: SearchApiV2
+        :return: self object
         """
         self._append_query(exists=','.join(exists))
-        return self.query_url
+        return self
 
     def not_exists(self, not_exists):
         """
@@ -320,8 +320,8 @@ class SearchApiV2(object):
 
         :type: list|tuple
         :param not_exists: fields, which must have values
-        :rtype: str
-        :return: updated query
+        :rtype: SearchApiV2
+        :return: self object
         """
         self._append_query(not_exists=','.join(not_exists))
-        return self.query_url
+        return self
