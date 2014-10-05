@@ -231,3 +231,23 @@ class SearchApiV2(object):
         """
         self._append_query(topic=topic)
         return self.query_url
+
+    def start_date(self, from_date=None, to_date=None):
+        """
+        Limits results to assets with a start date in the given range.
+
+        :type from_date: date
+        :param from_date: beginning of rande
+        :type to_date: date
+        :param to_date: end of rande
+        :rtype: str
+        :return: updated query
+        """
+        assert from_date or to_date
+
+        from_date_str = from_date.isoformat() if from_date else ''
+        to_date_str = to_date.isoformat() if to_date else ''
+
+        range_str = '%s..%s' % (from_date_str, to_date_str)
+        self._append_query(start_date=range_str)
+        return self.query_url

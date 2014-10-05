@@ -1,3 +1,4 @@
+from datetime import date
 from unittest import TestCase
 from urllib.parse import urlparse
 
@@ -106,4 +107,20 @@ class SearchApiV2Tests(TestCase):
     def test_topic(self):
         query = self.search_api.topic('Running')
         expected_query = self.base_query + '&topic=Running'
+        self.assertQueriesEqual(query, expected_query)
+
+    def test_start_date(self):
+        d1 = date(2014, 1, 2)
+        d2 = date(2014, 3, 4)
+
+        query = self.search_api.start_date(from_date=d1, to_date=d2)
+        expected_query = self.base_query + '&start_date=2014-01-02..2014-03-04'
+        self.assertQueriesEqual(query, expected_query)
+
+        query = self.search_api.start_date(from_date=d1)
+        expected_query = self.base_query + '&start_date=2014-01-02..'
+        self.assertQueriesEqual(query, expected_query)
+
+        query = self.search_api.start_date(to_date=d2)
+        expected_query = self.base_query + '&start_date=..2014-03-04'
         self.assertQueriesEqual(query, expected_query)
