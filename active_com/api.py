@@ -9,12 +9,12 @@ class SearchApiV2(object):
 
     def _append_query(self, **request):
         """
-        Appends query
+        Appends query.
 
         :param request: HTTP GET request to append
+        :rtype: str
         :return: self.query_url with appended HTTP GET keys and vals
         """
-
         url_parts = list(urlparse(self.query_url))
         query = dict(parse_qsl(url_parts[4]))
         query.update(request)
@@ -26,11 +26,15 @@ class SearchApiV2(object):
 
     def near(self, near):
         """
-        :param near: A string naming a place that can be geocoded.
-        If the near string is not geocodable, returns a failed
-        geocoded error.
+        Place that can be geocoded. If the near string is not
+        geocodable, returns a failed geocoded error.
 
         Example: San%20Diego,CA,US
+
+        :type near: str
+        :param near: Geocodable place name
+        :rtype: str
+        :return: updated query
         """
         self._append_query(near=near)
         return self.query_url
@@ -38,8 +42,13 @@ class SearchApiV2(object):
     def lat_lon(self, lat, lon):
         """
         A location specified as a latitude and longitude.
-        :param lat: latitude, example: 43.2
-        :param lon: latitude, example: -118
+
+        :type lat: float|int
+        :param lat: Latitude. Example: 43.2
+        :type lon: float|int
+        :param lon: Longitude. Example: -118
+        :rtype: str
+        :return: updated query
         """
         self._append_query(lat_lon="%s,%s" % (lat, lon))
         return self.query_url
@@ -58,12 +67,15 @@ class SearchApiV2(object):
 
     def radius(self, miles=None, kilometers=None):
         """
-        The search radius as specified in miles or kilometers
+        The search radius as specified in miles or kilometers.
 
+        :type miles: int|float
         :param miles: The search radius as specified in miles
+        :type kilometers: int|float
         :param kilometers: The search radius as specified in kilometers
+        :rtype: str
+        :return: updated query
         """
-
         assert miles or kilometers
         assert not(miles and kilometers)
 
@@ -76,34 +88,46 @@ class SearchApiV2(object):
         """
         Matches assets by city name.
 
+        :type city: str
         :param city: city name
+        :rtype: str
+        :return: updated query
         """
         self._append_query(city=city)
         return self.query_url
 
     def state(self, state):
         """
-        Matches assets by state or province code
+        Matches assets by state or province code.
 
+        :type state: str
         :param state: state or province code
+        :rtype: str
+        :return: updated query
         """
         self._append_query(state=state)
         return self.query_url
 
-    def zip(self, zip):
+    def zip(self, zip_code):
         """
-        Matches assets by zip or postal code
+        Matches assets by zip or postal code.
 
-        :param zip: zip or postal code
+        :type zip_code: str
+        :param zip_code: zip or postal code
+        :rtype: str
+        :return: updated query
         """
-        self._append_query(zip=zip)
+        self._append_query(zip=zip_code)
         return self.query_url
 
     def country(self, country):
         """
-        Matches assets by country name
+        Matches assets by country name.
 
+        :type country: str
         :param country: country name
+        :rtype: str
+        :return: updated query
         """
         self._append_query(country=country)
         return self.query_url
@@ -113,7 +137,10 @@ class SearchApiV2(object):
         Search by keywords. The free-form query to search.
         Equivalent to what a user types in the search box.
 
-        :param query: keywords
+        :type query: str
+        :param query: query string
+        :rtype: str
+        :return: updated query
         """
         self._append_query(query=query)
         return self.query_url
@@ -122,7 +149,10 @@ class SearchApiV2(object):
         """
         The current page of results. Defaults to 1.
 
+        :type current_page: int
         :param current_page: current page number
+        :rtype: str
+        :return: updated query
         """
         self._append_query(current_page=current_page)
         return self.query_url
@@ -131,7 +161,10 @@ class SearchApiV2(object):
         """
         The number of results to return. Defaults to 10.
 
+        :type per_page: int
         :param per_page: number of results to return
+        :rtype: str
+        :return: updated query
         """
         self._append_query(per_page=per_page)
         return self.query_url
@@ -146,7 +179,10 @@ class SearchApiV2(object):
         according to distance from the specified location smallest to
         largest.
 
+        :type sort: str
         :param sort: sort by (date_asc | date_desc | distance)
+        :rtype: str
+        :return: updated query
         """
         assert sort in ['date_asc', 'date_desc', 'distance']
 
@@ -164,7 +200,10 @@ class SearchApiV2(object):
         Example:
         query=tinker%20bell%20half%20marathon&facets=categoryName
 
-        :param facets: list, facet counts to return
+        :type facets: list|tuple
+        :param facets: facet counts to return
+        :rtype: str
+        :return: updated query
         """
         self._append_query(facets=','.join(facets))
         return self.query_url

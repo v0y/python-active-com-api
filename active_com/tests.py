@@ -39,7 +39,7 @@ class SearchApiV2Tests(TestCase):
         self.assertQueriesEqual(query, expected_query)
 
     def test_lan_lot(self):
-        query = self.search_api.lat_lon(52.2464391, '21.0334827')
+        query = self.search_api.lat_lon(52.2464391, 21.0334827)
         expected_query = self.base_query + '&lat_lon=52.2464391,21.0334827'
 
         self.assertQueriesEqual(query, expected_query)
@@ -79,12 +79,12 @@ class SearchApiV2Tests(TestCase):
         self.assertQueriesEqual(query, expected_query)
 
     def test_current_page(self):
-        query = self.search_api.current_page('3')
+        query = self.search_api.current_page(3)
         expected_query = self.base_query + '&current_page=3'
         self.assertQueriesEqual(query, expected_query)
 
     def test_per_page(self):
-        query = self.search_api.per_page('30')
+        query = self.search_api.per_page(30)
         expected_query = self.base_query + '&per_page=30'
         self.assertQueriesEqual(query, expected_query)
 
