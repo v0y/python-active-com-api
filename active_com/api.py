@@ -127,3 +127,12 @@ class SearchApiV2(object):
         self._append_query(current_page=current_page)
         return self.query_url
 
+    def per_page(self, per_page):
+        """
+        The number of results to return. Defaults to 10.
+
+        :param per_page: number of results to return
+        """
+        self._append_query(per_page=per_page)
+        return self.query_url
+

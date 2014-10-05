@@ -82,3 +82,8 @@ class SearchApiV2Tests(TestCase):
         query = self.search_api.current_page('3')
         expected_query = self.base_query + '&current_page=3'
         self.assertQueriesEqual(query, expected_query)
+
+    def test_per_page(self):
+        query = self.search_api.per_page('30')
+        expected_query = self.base_query + '&per_page=30'
+        self.assertQueriesEqual(query, expected_query)
