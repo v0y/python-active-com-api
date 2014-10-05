@@ -1,4 +1,6 @@
+import json
 from urllib.parse import parse_qsl, urlencode, urlparse, urlunparse
+from urllib.request import urlopen
 
 
 class SearchApiV2(object):
@@ -23,6 +25,18 @@ class SearchApiV2(object):
         query = urlunparse(url_parts)
         self.query_url = query.replace('%2C', ',')  # fix commas
         return self.query_url
+
+    def get(self):
+        """
+        Make query and get data.
+
+        :rtype: dict
+        :return: data from API
+        """
+        response = urlopen(self.query_url)
+        encoding = response.headers.get_content_charset()
+        data = json.loads(response.read().decode(encoding))
+        return data
 
     def near(self, near):
         """
