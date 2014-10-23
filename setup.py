@@ -7,13 +7,15 @@ here = os.path.abspath(os.path.dirname(__file__))
 with open(os.path.join(here, 'README.md')) as f:
     README = f.read()
 
-requires = [
-    'nose2==0.4.7'
+install_requires = []
+
+tests_require = [
+    'nose2==0.5'
 ]
 
 setup(
     name='python-active-com-api',
-    version='0.1',
+    version='0.1.1',
     description='Python client for Active.com API ',
     long_description=README,
     classifiers=[
@@ -27,6 +29,7 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     zip_safe=False,
-    install_requires=requires,
+    install_requires=install_requires,
+    tests_require=tests_require,
     test_suite='nose2.collector.collector',
 )
