@@ -12,7 +12,7 @@ tests_require = [
 
 setup(
     name='python-active-com-api',
-    version='0.1.1',
+    version='0.1.2',
     description='Python client for Active.com API ',
     long_description=open(os.path.join(here, 'README.md')).read(),
     classifiers=[
