@@ -4,9 +4,6 @@ from setuptools import setup, find_packages
 
 here = os.path.abspath(os.path.dirname(__file__))
 
-with open(os.path.join(here, 'README.md')) as f:
-    README = f
-
 install_requires = []
 
 tests_require = [
@@ -15,9 +12,9 @@ tests_require = [
 
 setup(
     name='python-active-com-api',
-    version='0.1.2',
+    version='0.1.1',
     description='Python client for Active.com API ',
-    long_description=README.read(),
+    long_description=open(os.path.join(here, 'README.md')).read(),
     classifiers=[
         "Programming Language :: Python :: 3",
         "Intended Audience :: Developers",
