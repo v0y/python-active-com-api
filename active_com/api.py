@@ -17,6 +17,10 @@ class SearchApiV2(object):
         :rtype: str
         :return: self.query_url with appended HTTP GET keys and vals
         """
+
+        # remove Nones
+        request = {k: v for k, v in request.items() if v is not None}
+
         url_parts = list(urlparse(self.query_url))
         query = dict(parse_qsl(url_parts[4]))
         query.update(request)

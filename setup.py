@@ -10,7 +10,7 @@ tests_require = [
 
 setup(
     name='python-active-com-api',
-    version='0.1.3',
+    version='0.1.4',
     description='Python client for Active.com API',
     classifiers=[
         "Programming Language :: Python :: 3",

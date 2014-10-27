@@ -174,3 +174,8 @@ class SearchApiV2Tests(TestCase):
         query = self.search_api.country('Canada').city('Radom').query_url
         expected_query = self.base_query + '&country=Canada&city=Radom'
         self.assertQueriesEqual(query, expected_query)
+
+    def test_chaining_filters_with_nones(self):
+        query = self.search_api.country('Canada').city(None).query_url
+        expected_query = self.base_query + '&country=Canada'
+        self.assertQueriesEqual(query, expected_query)
